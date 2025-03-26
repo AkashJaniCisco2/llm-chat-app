@@ -15,8 +15,9 @@ const InputArea = ({
   // Remove the Enter key handling for sending messages
   const handleKeyDown = (e) => {
     // Allow Enter key to insert a new line
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if ((e.key === 'Enter' || e.key === 'Return') && !e.shiftKey) {
       // No need to prevent default behavior
+      handleSendMessage();
     }
   };
 
@@ -34,6 +35,7 @@ const InputArea = ({
     }
   };
 
+
   return (
     <div className="flex w-full gap-2 rounded-[26px] p-1.5 transition-colors contain-inline-size bg-gray-100">
       <div className="flex min-w-0 flex-1 flex-col">
@@ -50,6 +52,7 @@ const InputArea = ({
       </div>
       <div className="min-w-8 relative">
         <button
+        // Send message when enter button is clicked
           onClick={handleSendMessage}
           className={`w-10 h-10 absolute bottom-0 right-1 flex items-center justify-center rounded-full transition duration-200 ${
             content || isLoading ? 'bg-black text-white' : 'bg-gray-200 text-black'
